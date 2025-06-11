@@ -1,15 +1,17 @@
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
+import * as fs from "fs";
+import * as path from "path";
 
 const token = process.env["GITHUB_TOKEN"];
 const endpoint = "https://models.github.ai/inference";
-const model = "meta/Llama-3.2-11B-Vision-Instruct";
+const model = "openai/gpt-4.1";
 
 export async function main() {
   // Read the image file as a base64 string
-//   const imagePath = path.join(process.cwd(), "contoso_layout_sketch.jpg");
-//   const imageBuffer = fs.readFileSync(imagePath);
-//   const imageBase64 = imageBuffer.toString("base64");
+  const imagePath = path.join(process.cwd(), "contoso_layout_sketch.jpg");
+  const imageBuffer = fs.readFileSync(imagePath);
+  const imageBase64 = imageBuffer.toString("base64");
 
   const client = ModelClient(
     endpoint,
@@ -23,11 +25,11 @@ export async function main() {
         {
           role: "user",
           content: [
-            { type: "text", text: "What products and prices are shown in this image?" },
+            { type: "text", text: "write me the html and css code for a web page based on the following hand draws sketch. Make it look good and modern" },
             {
               type: "image_url",
               image_url: {
-                url: "https://github.com/Azure-Samples/JS-AI-Build-a-thon/blob/assets/jsai-buildathon-assets/contoso_layout_sketch.jpg?raw=true"
+                url: `data:image/jpeg;base64,${imageBase64}`
               }
             }
           ]
