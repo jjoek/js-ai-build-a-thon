@@ -7,3 +7,11 @@
 
 # step 4
 Here I had to modify the chat ui to include the sources bit section
+
+
+# Todo 
+- [ ] remove the langchainjs requirement from the root package.json
+
+## Base Repo issues
+- The base repo is ignoring the packages directory and thus not tracking the packages directory changes
+- The initial chat ui in step 4 doesn't correctly handle sources element section
