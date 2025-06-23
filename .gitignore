@@ -403,3 +403,6 @@ FodyWeavers.xsd
 # Environment variables
 .env
 .azure
+
+# Agent Configuration
+packages/agent/my-agent.agent.yaml
