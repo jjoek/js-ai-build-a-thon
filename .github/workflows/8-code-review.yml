@@ -46,12 +46,12 @@ jobs:
         uses: skills/action-check-file@v1
         with:
           file: "code-review.genai.js"
-          search: "GITHUB_TOKEN"
+          search: "APP_GITHUB_TOKEN"
 
-      # In README.md, switch step 2 for step 3.
+      # In README.md, switch step 2 for stegitp 3.
       - name: Update to step 9
         uses: skills/action-update-step@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.APP_GITHUB_TOKEN }}
           from_step: 8
           to_step: 9

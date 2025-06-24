@@ -407,3 +407,7 @@ FodyWeavers.xsd
 
 # Agent Configuration
 packages/agent/my-agent.agent.yaml
+
+genaiscript.d.ts
+tsconfig.json
+jsconfig.json

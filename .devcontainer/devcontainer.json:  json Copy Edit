@@ -1,0 +1,16 @@
+{
+  "name": "Js-Ai-build-A-thon",
+  "context": "..",
+  "dockerFile": "../Dockerfile",
+  "workspaceFolder": "/app",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "npm install",
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ],
+  "forwardPorts": [9229],
+  "remoteUser": "node"
+}
