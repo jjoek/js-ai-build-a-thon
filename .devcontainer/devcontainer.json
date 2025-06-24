@@ -1,0 +1,27 @@
+{
+  "name": "Js-Ai-build-A-thon",
+  "context": "..",
+  "dockerFile": "../Dockerfile",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "nodejs.packageManager": "npm"
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-tslint-plugin",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "postCreateCommand": "cd packages/webapi && npm install && cd ../webapp && npm install",
+  "forwardPorts": [3001, 5173, 9229],
+  "remoteUser": "root"
+}
