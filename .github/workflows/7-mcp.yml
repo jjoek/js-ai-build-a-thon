@@ -51,7 +51,7 @@ jobs:
           fi
 
       - name: Update to step 8
-        if: steps.check_node-os-mcp.outputs.agent_exists == 'true' # Only update if the directory exists
+        # if: steps.check_node-os-mcp.outputs.agent_exists == 'true' # Only update if the directory exists
         uses: skills/action-update-step@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
