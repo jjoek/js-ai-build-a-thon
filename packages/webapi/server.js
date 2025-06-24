@@ -10,6 +10,7 @@ import { dirname } from 'path';
 import pdfParse from 'pdf-parse/lib/pdf-parse.js';
 import { BufferMemory } from "langchain/memory";
 import { ChatMessageHistory } from "langchain/stores/message/in_memory";
+// import { AgentService } from "./agentService.js";
 // -------------------------------------------------
 
 dotenv.config();
@@ -34,6 +35,7 @@ const chatModel = new AzureChatOpenAI({
   maxTokens: 4096,
 });
 
+console.log(process.env.AZURE_INFERENCE_SDK_KEY, process.env.INSTANCE_NAME, process.env.DEPLOYMENT_NAME);
 let pdfText = null; 
 let pdfChunks = []; 
 const CHUNK_SIZE = 800; 
@@ -96,6 +98,8 @@ function retrieveRelevantContent(query) {
     .map(item => item.chunk);
 }
 
+// const agentService = new AgentService();
+
 app.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
   const useRAG = req.body.useRAG === undefined ? true : req.body.useRAG;
@@ -123,6 +127,17 @@ app.post("/chat", async (req, res) => {
         role: "system",
         content: "You are a helpful and knowledgeable assistant. Answer the user's questions concisely and informatively.",
       };
+
+    const mode = req.body.mode || "basic";
+
+    // If agent mode is selected, route to agent service
+    // if (mode === "agent") {
+    //     const agentResponse = await agentService.processMessage(sessionId, userMessage);
+    //     return res.json({
+    //         reply: agentResponse.reply,
+    //         sources: []
+    //     });
+    // }
 
   try {
     // Build final messages array
