@@ -1,4 +1,4 @@
-import { AIProjectsClient } from "@azure/ai-projects";
+import { AIProjectClient } from "@azure/ai-projects";
 import { DefaultAzureCredential } from "@azure/identity";
 import dotenv from "dotenv";
 
@@ -8,10 +8,8 @@ const agentThreads = {};
 
 export class AgentService {
   constructor() {
-    this.client = AIProjectsClient.fromConnectionString(
-      process.env.AGENT_CONNECTION_STRING,
-      new DefaultAzureCredential()
-    );
+    const endpoint = process.env.AGENT_CONNECTION_STRING;
+    this.client = new AIProjectClient(endpoint, new DefaultAzureCredential());
     
     // You can get the agent ID from your my-agent.agent.yaml file or the sample code
     this.agentId = process.env.AGENT_ID;
@@ -19,6 +17,9 @@ export class AgentService {
 
   async getOrCreateThread(sessionId) {
     if (!agentThreads[sessionId]) {
+        const agent = await this.client.agents.createAgent();
+
+      console.log(JSON.stringify(agent, null, 2));
       const thread = await this.client.agents.createThread();
       agentThreads[sessionId] = thread.id;
       return thread.id;

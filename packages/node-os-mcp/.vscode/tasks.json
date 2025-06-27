@@ -14,7 +14,7 @@
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {
-          "PORT": "3001"
+          "PORT": "3003"
         }
       },
       "problemMatcher": {

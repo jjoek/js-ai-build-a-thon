@@ -27,3 +27,5 @@ Switched to a different machine and don't want to install any dependencies on it
 ## Base Repo issues
 - The base repo is ignoring the packages directory and thus not tracking the packages directory changes
 - The initial chat ui in step 4 doesn't correctly handle sources element section
+- The agentservice.js has the wrong import `import { AIProjectsClient } from "@azure/ai-projects";` this should be `AIProjectClient`
+- On step 7 - MCP the auto created node_os_mcp listens on port 3001 you need to update the .vscode/settings.json env to 300X not 3001 and the .aitk/mcp.json as well

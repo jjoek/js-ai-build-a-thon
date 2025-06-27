@@ -50,7 +50,7 @@ export class ChatInterface extends LitElement {
         
         // Disable RAG when switching to agent mode
         if (newMode === 'agent') {
-        this.ragEnabled = false;
+            this.ragEnabled = false;
         }
         
         clearMessages();
@@ -186,20 +186,6 @@ export class ChatInterface extends LitElement {
   }
 
   async _apiCall(message) {
-    const res = await fetch("http://localhost:3001/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-        message,
-        useRAG: this.ragEnabled,
-        mode: this.chatMode // Send the selected mode to the server
-        }),
-    });
-    const data = await res.json();
-    return data;
-  }
-
-  async _apiCall(message) {
     const API_BASE_URL = window.API_URL || "http://localhost:3001";
     
     const res = await fetch(`${API_BASE_URL}/chat`, {
@@ -207,7 +193,8 @@ export class ChatInterface extends LitElement {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
             message,
-            useRAG: this.ragEnabled 
+            useRAG: this.ragEnabled,
+            mode: this.chatMode // Send the selected mode to the server
         }),
     });
     const data = await res.json();
